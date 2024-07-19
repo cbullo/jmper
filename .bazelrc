@@ -1,0 +1,7 @@
+build --cxxopt="-std=c++17"
+build --copt="-pie"
+#build --copt="-flto"
+#build --copt="-fuse-linker-plugin"
+#build --copt="-ffat-lto-objects"
+
+build --sandbox_writable_path=/home/tomasz/.ccache

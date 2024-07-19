@@ -1,0 +1,16 @@
+load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library")
+load("@AvrToolchain//platforms/cpu_frequency:cpu_frequency.bzl", "cpu_frequency_flag")
+
+package(default_visibility = ["//visibility:public"])
+
+cc_library(
+    name = "simplefoc_lib",
+    srcs = glob(["**/*.h"]) + glob(["**/*.cpp"]),
+    copts = cpu_frequency_flag() + ["-Os", "-ffat-lto-objects","-fuse-linker-plugin", "-flto", "-ffunction-sections", "-fdata-sections", "-Wl,--gc-sections", "-Wl,--strip-all"],
+    deps = [
+        "@arduino//:arduino_core",
+        "@arduino//:arduino_wire_lib",
+        "@arduino//:arduino_spi_lib"
+    ],
+    defines = ["FOC_USE_SINE_MODULATION"]
+)
